@@ -36,7 +36,6 @@ export const StepOne = ({ nextStep, handleFormData, values }) => {
   const valid =
     validator.isEmpty(values.source) ||
     values.fullName.length < 3 ||
-    /* validator.isEmail(values.email) || */
     values.linkedin.length < 5;
 
   const submitFormData = (e) => {
@@ -50,9 +49,6 @@ export const StepOne = ({ nextStep, handleFormData, values }) => {
       values.fullName.length < 3 &&
         handleError("fullName", "El campo debe tener mas de 3 caracteres");
 
-      /* validator.isEmail(values.email) &&
-        handleError("email", "Ingresa un email valido"); */
-
       values.linkedin.length < 5 &&
         handleError("linkedin", "Ingresa un link valido");
     } else {
@@ -61,7 +57,7 @@ export const StepOne = ({ nextStep, handleFormData, values }) => {
   };
 
   return (
-    <form onSubmit={submitFormData}>
+    <form onSubmit={submitFormData} encType="multipart/form-data">
       <div className="border-b border-gray-900/10 pb-12">
         <h2 className="text-base font-semibold leading-7 text-gray-900">
           Informacion personal del candidato
@@ -92,7 +88,7 @@ export const StepOne = ({ nextStep, handleFormData, values }) => {
                 className={`block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 ${
                   error.fullName
                     ? "border-2 border-red-500 focus:ring-red-500"
-                    : "focus:ring-indigo-600"
+                    : "focus:ring-primary"
                 }`}
               />
             </div>
@@ -123,7 +119,7 @@ export const StepOne = ({ nextStep, handleFormData, values }) => {
                 className={`block w-full rounded-md border-0  px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 ${
                   error.email
                     ? "border-2 border-red-500 focus:ring-red-500"
-                    : "focus:ring-indigo-600"
+                    : "focus:ring-primary"
                 }`}
               />
             </div>
@@ -148,7 +144,7 @@ export const StepOne = ({ nextStep, handleFormData, values }) => {
                 autoComplete="country-name"
                 value={values.country}
                 onChange={handleFormData("country")}
-                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -169,7 +165,7 @@ export const StepOne = ({ nextStep, handleFormData, values }) => {
                 autoComplete="city-name"
                 value={values.city}
                 onChange={handleFormData("city")}
-                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -191,7 +187,7 @@ export const StepOne = ({ nextStep, handleFormData, values }) => {
                 value={values.phone}
                 onChange={handleFormData("phone")}
                 required
-                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -213,7 +209,7 @@ export const StepOne = ({ nextStep, handleFormData, values }) => {
                 className={`block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset   sm:text-sm sm:leading-6 ${
                   error.source
                     ? "border-2 border-red-500 focus:ring-red-500"
-                    : "focus:ring-indigo-600"
+                    : "focus:ring-primary"
                 }`}
               >
                 <option>Elige</option>
@@ -249,7 +245,7 @@ export const StepOne = ({ nextStep, handleFormData, values }) => {
                 className={`block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 ${
                   error.linkedin
                     ? "border-2 border-red-500 focus:ring-red-500"
-                    : "focus:ring-indigo-600"
+                    : "focus:ring-primary"
                 }`}
               />
             </div>
@@ -276,12 +272,33 @@ export const StepOne = ({ nextStep, handleFormData, values }) => {
                 placeholder="Link ..."
                 value={values.github}
                 onChange={handleFormData("github")}
-                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
               />
             </div>
           </div>
 
-          <div className="col-span-full">
+          <div className="sm:col-span-3">
+            <label
+              htmlFor="file-upload"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Link the CV of your candidate
+            </label>
+            <div className="mt-2">
+              <input
+                type="text"
+                name="file-upload"
+                id="file-upload"
+                autoComplete="file-upload"
+                placeholder="Link ..."
+                value={values.cv}
+                onChange={handleFormData("cv")}
+                className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+              />
+            </div>
+          </div>
+
+          {/* <div className="col-span-full">
             <label
               htmlFor="upload-cv"
               className="block text-sm font-medium leading-6 text-gray-900"
@@ -290,13 +307,12 @@ export const StepOne = ({ nextStep, handleFormData, values }) => {
             </label>
             <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
               <div className="text-center">
-                {/* <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" /> */}
                 <div className="mt-4 flex text-sm leading-6 text-gray-600">
                   <label
                     htmlFor="file-upload"
-                    className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                    className="relative cursor-pointer rounded-md bg-white font-semibold text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:text-primary"
                   >
-                    <span>Upload a file</span>
+                    <span className="px-2">{values.cv ? values.cv?.name : 'Upload a file'}</span>
                     <input
                       id="file-upload"
                       name="file-upload"
@@ -305,18 +321,18 @@ export const StepOne = ({ nextStep, handleFormData, values }) => {
                       className="sr-only"
                     />
                   </label>
-                  <p className="pl-1">or drag and drop</p>
+                  <p className="pl-3">or drag and drop</p>
                 </div>
-                <p className="text-xs leading-5 text-gray-600">PDF up to 5MB</p>
+                <p className="text-xs leading-5 text-gray-600 mt-2">PDF up to 5MB</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="mt-6 flex items-center justify-end gap-x-6">
         <button
           type="submit"
-          className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           Next
         </button>

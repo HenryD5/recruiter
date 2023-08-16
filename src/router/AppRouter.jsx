@@ -4,10 +4,10 @@ import { HomePage, JobsPage, ApplyJobPage, RecruitersApplyJobPage } from '../pag
 export const AppRouter = () => {
   return (
     <Routes>
-      <Route path="recruiters-apply-job" element={<HomePage />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="jobs" element={<JobsPage />} />
       <Route path="apply-job" element={<ApplyJobPage />} />
-      <Route path="/" element={<RecruitersApplyJobPage />} />
+      <Route path="recruiters-apply-job" element={<RecruitersApplyJobPage />} />
       <Route path="/*" element={<Navigate to="/" />} />
     </Routes>
   )

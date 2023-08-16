@@ -5,12 +5,14 @@ import { Loader } from "../Loader";
 import Modal from "../Modal";
 import { Failed } from "../responses/Failed";
 import { Success } from "../responses/Success";
+//import useAirtable from "../../hooks/useAirtable";
 import { useDataSender } from "../../hooks/useDataSender";
 
 export const RecruiterApply = () => {
   const isNumbers = ["phone", "currentSalary", "expectationSalary"];
   const isChecks = ["likes"];
   const isArrays = ["roles", "stackJunior", "stackMid", "stackSenior"];
+  //const isFiles = ["cv"]
 
   const [step, setstep] = useState(1);
 
@@ -19,6 +21,9 @@ export const RecruiterApply = () => {
   const [showModal, setShowModal] = useState(false);
 
   const [responseType, setResponseType] = useState('failed');
+
+
+  //const { records, loading, error, addRecord } = useAirtable();
 
   const { isLoading, error, responseData, sendData } = useDataSender();
 
@@ -55,6 +60,7 @@ export const RecruiterApply = () => {
   const saveData = () => {
     //setisLoading(true);
     console.log("Save Data ...", formData);
+    //addRecord(formData, 'candidates');
     sendData(formData);
     //setisLoading(false);
     setShowModal(true);
@@ -91,7 +97,7 @@ export const RecruiterApply = () => {
   };
 
   const handleInputData = (input, data) => (e) => {
-    const { value, checked } = e.target;
+    const { value, checked, /* files */ } = e.target;
 
     let newValue;
     if (
@@ -108,6 +114,9 @@ export const RecruiterApply = () => {
       if (isArrays.includes(input)) {
         newValue = handleArrays(formData[input], data);
       }
+      /* if(isFiles.includes(input)){
+        newValue = files[0];
+      } */
     } else {
       newValue = value;
     }
@@ -158,7 +167,7 @@ export const RecruiterApply = () => {
       </div>
       {isLoading && <Loader />}
       <Modal showModal={showModal} setShowModal={setShowModal}>
-        {responseType === "success" ? (
+        {!error ? (
           <Success setShowModal={setShowModal} />
         ) : (
           <Failed setShowModal={setShowModal} />

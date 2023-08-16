@@ -1,7 +1,7 @@
 import { JobCard } from "./JobCard";
 import { JobTags } from "./JobTags";
 
-export const JobList = () => {
+export const JobList = ({positions}) => {
   return (
     <div className="container mx-auto px-5 py-6">
       <div className="text-center my-6">
@@ -15,11 +15,9 @@ export const JobList = () => {
           <JobTags />
         </div>
         <div className="grid lg:grid-cols-4 gap-3 pt-3 pb-12">
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
+          {positions.map((position, index) => (
+            <JobCard key={index} {...position} />
+          ))}
         </div>
       </div>
     </div>
